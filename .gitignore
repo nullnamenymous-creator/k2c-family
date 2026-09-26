@@ -32,3 +32,5 @@ next-env.d.ts
 # Operating System Files
 .DS_Store
 Thumbs.db
+
+.login-debug.log

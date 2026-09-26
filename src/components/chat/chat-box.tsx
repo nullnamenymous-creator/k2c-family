@@ -27,6 +27,7 @@ export function ChatBox({ room, currentUser, onBack, isMobile = false }: ChatBox
   const {
     messages,
     isLoading,
+    error,
     sendMessage,
     isRealtimeConnected,
     typingUsers,
@@ -164,6 +165,12 @@ export function ChatBox({ room, currentUser, onBack, isMobile = false }: ChatBox
             Hari ini
           </div>
         </div>
+
+        {error && (
+          <div className="mx-auto mb-3 max-w-md rounded-xl border border-rose-500/20 bg-rose-500/10 px-3 py-2 text-xs text-rose-600 dark:text-rose-400">
+            {error}
+          </div>
+        )}
 
         {/* Loading Skeleton */}
         {isLoading && (

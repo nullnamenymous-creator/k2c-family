@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, use } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { MOCK_ROOMS, MOCK_PROFILES } from '@/lib/mock-data';
 import { ChatBox } from '@/components/chat/chat-box';
 import { Room } from '@/lib/types';
 import { supabase } from '@/lib/supabase/client';
@@ -17,22 +16,14 @@ export default function RoomPage({
   const roomId = resolvedParams.id;
   const router = useRouter();
   const { currentUser } = useAuth();
-  const [room, setRoom] = useState<Room | null>(() => {
-    return MOCK_ROOMS.find((r) => r.id === roomId) || null;
-  });
-  const [loading, setLoading] = useState(!room);
+  const [room, setRoom] = useState<Room | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadRoomDetails() {
-      // 1. Check local mock rooms
-      const mockFound = MOCK_ROOMS.find((r) => r.id === roomId);
-      if (mockFound) {
-        setRoom(mockFound);
-        setLoading(false);
-        return;
-      }
-
-      // 2. Fetch from Supabase
+      setLoading(true);
+      setError(null);
       try {
         const { data, error } = await supabase
           .from('rooms')
@@ -50,23 +41,13 @@ export default function RoomPage({
           };
           setRoom(formatted);
         } else {
-          // Fallback generic room
-          setRoom({
-            id: roomId,
-            name: 'Obrolan Keluarga',
-            is_group: false,
-            created_at: new Date().toISOString(),
-            participants: MOCK_PROFILES,
-          });
+          setRoom(null);
+          setError('Ruang obrolan tidak ditemukan atau tidak dapat diakses.');
         }
       } catch (err) {
-        setRoom({
-          id: roomId,
-          name: 'Obrolan Keluarga',
-          is_group: false,
-          created_at: new Date().toISOString(),
-          participants: MOCK_PROFILES,
-        });
+        console.error('[Room] Failed to load room:', err);
+        setRoom(null);
+        setError('Gagal memuat ruang obrolan.');
       } finally {
         setLoading(false);
       }
@@ -75,13 +56,21 @@ export default function RoomPage({
     loadRoomDetails();
   }, [roomId]);
 
-  if (loading || !room) {
+  if (!currentUser) return null;
+
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-full w-full bg-[#F2F2F7] dark:bg-black">
-        <div className="flex flex-col items-center gap-2">
-          <div className="w-8 h-8 rounded-full border-2 border-[#007AFF] border-t-transparent animate-spin" />
-          <span className="text-xs text-zinc-500">Memuat obrolan...</span>
-        </div>
+        <div className="w-8 h-8 rounded-full border-2 border-[#007AFF] border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+
+  if (!room) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#F2F2F7] dark:bg-black text-center px-6">
+        <p className="text-sm text-zinc-600 dark:text-zinc-300">{error || 'Ruang obrolan tidak tersedia.'}</p>
+        <button onClick={() => router.push('/')} className="text-sm font-medium text-[#007AFF]">Kembali ke daftar ruang</button>
       </div>
     );
   }
