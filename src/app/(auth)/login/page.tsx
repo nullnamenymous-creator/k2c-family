@@ -50,14 +50,14 @@ export default function LoginPage() {
       <div className="relative w-full max-w-md p-6 sm:p-8 rounded-[32px] bg-white/75 dark:bg-zinc-900/80 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-ios-float animate-slide-up">
         {/* Header Branding */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#007AFF] to-[#5856D6] text-white shadow-lg shadow-blue-500/25 mb-3 ring-2 ring-white/40">
-            <Sparkles className="w-7 h-7" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-lg shadow-blue-500/25 mb-3 ring-2 ring-white/60">
+            <img src="/icons/icon-192x192.png" alt="K2C Family" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
-            Family Chat
+            K2C Family
           </h1>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-            Ruang Komunikasi Hangat Keluarga • Polished iOS Glass
+            Ruang Komunikasi Keluarga • K2C Family
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function LoginPage() {
                 <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
               ) : (
                 <>
-                  <span>Masuk ke Family Chat</span>
+                  <span>Masuk ke K2C Family</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

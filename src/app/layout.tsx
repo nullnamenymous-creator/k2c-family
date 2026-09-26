@@ -1,15 +1,15 @@
-import type { Metadata, Viewport } from 'next';
+﻿import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
-  title: 'Family Chat - Polished iOS Glass',
-  description: 'PWA Chat Keluarga Realtime dengan estetika Polished iOS Clean Glass',
+  title: 'K2C Family',
+  description: 'K2C Family - ruang komunikasi keluarga realtime',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Family Chat',
+    title: 'K2C Family',
   },
   icons: {
     icon: '/icons/icon-192x192.png',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#007AFF',
+  themeColor: '#0B5CFF',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -45,3 +45,4 @@ export default function RootLayout({
     </html>
   );
 }
+

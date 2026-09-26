@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
   configureWebPush();
 
   const payload = JSON.stringify({
-    title: sender?.full_name || 'Family Chat',
+    title: sender?.full_name || 'K2C Family',
     body: message.content,
     roomId,
     messageId,

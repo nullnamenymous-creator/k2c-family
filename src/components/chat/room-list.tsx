@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Room, Profile, ActiveFilter } from '@/lib/types';
-import { Users, Search, Sparkles, LogOut } from 'lucide-react';
+import { Users, Search, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 interface RoomListProps {
@@ -44,8 +44,8 @@ export function RoomList({ rooms, activeRoomId, currentUser, availableProfiles, 
       <div className="p-4 pb-2 space-y-3 border-b border-white/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#007AFF] to-[#5856D6] flex items-center justify-center text-white"><Sparkles className="w-4 h-4" /></div>
-            <div><h1 className="text-base font-bold">Family Chat</h1><span className="text-[10px] text-zinc-500">Polished iOS Glass</span></div>
+            <div className="w-9 h-9 rounded-xl overflow-hidden bg-white shadow-sm ring-1 ring-white/60"><img src="/icons/icon-192x192.png" alt="K2C Family" className="w-full h-full object-cover" /></div>
+            <div><h1 className="text-base font-bold">K2C Family</h1><span className="text-[10px] text-zinc-500">Together Always</span></div>
           </div>
           <button onClick={onSignOut} className="p-2 text-zinc-500 hover:text-rose-500" aria-label="Keluar"><LogOut className="w-4 h-4" /></button>
         </div>
